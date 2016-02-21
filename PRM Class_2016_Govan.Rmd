@@ -1,0 +1,125 @@
+---
+title: "Risk Network Modeling and Analysis in the Energy Industry"
+author: "Paul Govan"
+date: "February 26, 2016"
+output: 
+  ioslides_presentation: 
+    smaller: yes
+---
+
+## Introduction
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/spar_2008b.png?raw=true" height="225px" />
+
+* Technip is active in three primary business activities
+    + Subsea
+    + Offshore
+    + Onshore
+* 21 vessels (+ 6 in construction)
+* 38,000 people in 48 countries (2014)
+
+## Project Risk Management Group
+
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Screen.Shot.2016-02-20.at.1.04.46.PM.png?raw=true" height="200px" />
+
+* Provide risk management support to the NA region
+* Faciliate project risk workshops and elicitation sessions
+* Perform MC cost and schedule simulation risk analysis
+* Research & development
+    + Risk Management Dashboard (group)
+    + Mechanical Completion Tool (project)
+    + Health Assessment Tool for Structures (grant)
+
+## Common Risk in the Energy Industry
+
+
+
+## The Resource-based View (RBV)
+
+* The RBV is a management theory that shows that a firm can be defined as a set of resources
+* A resource can be any strength or weakness of the firm
+* Tangible
+    + Capital, labor, machinery, natural resources
+* Intangible (capability)
+    + Brand, technology, education, skill
+* In project management, if an organization is defined as a set of resources, then, logically, any part of such an organization, such as projects, is a subset of resources
+
+## The Resource-based Project Risk Analysis Approach
+
+* One way of thinking about project risk is in terms of the uncertainty associated with the expenditure of resources
+* Risk may lead to either
+    + Additional resource required to complete a task (e.g. engineering rework)
+    + Additional cost of acquiring resources (e.g. engineering manhours)
+* In fact, the impact of all risk events may be linked to some project or organizational resource impact
+* This approach is a natural bridge between the RBV theory and project risk management
+
+## Causal Networks for Project Risk Analysis
+
+```{r, echo=FALSE, warning=FALSE}
+library(bnlearn)
+library(networkD3)
+data <- matrix(NA, ncol = 14)
+dag <- model2network("[Cause-Delays on other project][Cause-Install scheduled during hurricane season][Risk-vessel delayed on other project|Cause-Delays on other project][Risk-Inclement weather|Cause-Install scheduled during hurricane season][Resource-Transport vessel rate][Resource-2 transport vessels|Risk-Inclement weather][Resource-1 install vessel|Risk-Inclement weather][Resource-Install vessel rate|Risk-vessel delayed on other project][Resource-25 HUC personnel][Resource-HUC personnel rate][Task-Jacket, topsides, pile tow|Resource-Transport vessel rate:Resource-2 transport vessels][Task-Offshore install|Resource-Transport vessel rate:Resource-2 transport vessels:Resource-Install vessel rate:Resource-1 install vessel][Task-HUC|Resource-HUC personnel rate:Resource-25 HUC personnel][Project-Platform install|Task-Jacket, topsides, pile tow:Task-Offshore install:Task-HUC]")
+simpleNetwork(data.frame(arcs(dag)), Source = "from", Target = "to",
+                  linkDistance = 100, charge = -400, fontSize = 12, 
+                  opacity = 0.8)
+```
+
+## Components for Model Development
+
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Model.Input.png?raw=true" height="500px" />
+
+## Bayesian Inference
+
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Bayesian.Inference.png?raw=true" height="175px" />
+
+* Bayesian Inference is basically the process of updating beliefs based on *evidence*
+* As evidence becomes available, inference allows for updating the model as needed
+* Inference also serves as a type of what if or scenario analysis (e.g. evaluation of different contract strategies)
+
+## Bayesian Learning
+
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Bayesian.Learning.png?raw=true" height="300px" />
+
+* Bayesian learning is a branch of machine learning that is based on Bayesian statistical models
+* Learning is basically the process of combining beliefs with *observed data*
+* Adding data to the model generally leads to more precise estimates of the model parameters
+
+## Network Measures for Project Risk Analysis
+
+```{r, echo=FALSE, warning=FALSE}
+library(d3heatmap)
+d3heatmap(amat(dag), dendrogram = "both", symm = TRUE, 
+                cexRow = 0.7, cexCol = 0.7, colors = "Blues")
+```
+
+## RiskNetwork: risk network modeling and analysis
+
+<img src="https://github.com/paulgovan/RiskNetwork/blob/master/images/RiskNetwork%20Structure%20Tab.png?raw=true" height="400px" />
+
+[http://paulgovan.github.io/RiskNetwork/](http://paulgovan.github.io/RiskNetwork/)
+
+## Key Implications for the Energy Industry
+
+## Summary and Conclusions
+
+* The risk network modeling and analysis approach described here provides a common framework for modeling and assessing project risk in terms of the uncertainty associated with the expenditure of resources
+* This framework is applicable acrosss different functions of the organization and at different hierarchical levels for task, project, and organizational decision-making
+* The integrative risk network approach allows for both graphical structural and data-intensive evaluation of project risks
+* Another key aspect of this approach is that it is already integrated with a number of methods already used in industry practice with little to no additional requirements
+
+## Additional Resources
+
+### The Resource-based View on Project Risk Analysis
+Govan, Paul and Ivan Damnjanovic. "The Resource-based View on Project Risk Management." Journal of Construction Engineering and Management (2015). *Coming soon*
+
+### RiskNetwork
+[http://paulgovan.github.io/RiskNetwork/](http://paulgovan.github.io/RiskNetwork/)
+
+### This presentation
+[https://github.com/paulgovan/PRMClass_2016.git](https://github.com/paulgovan/PRMClass_2016.git)
+
+### Github profile
+[https://github.com/paulgovan](https://github.com/paulgovan)
+
+
+
