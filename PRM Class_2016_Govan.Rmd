@@ -100,6 +100,11 @@ d3heatmap(amat(dag), dendrogram = "both", symm = TRUE,
 
 ## Key Implications for the Energy Industry
 
+* The resource-based risk analysis approach provides a common language for describing risk in terms of resources that translates across industry segments
+* This approach is dynamic in that the model can grow and improve over time as new or better information becomes available over the course of the project
+* The application of network measures helps to identify things like critical resources and tasks on the project (e.g. resources that are highly interconnected due to risk)
+* The resource-based risk formulation provides a method to estimate correlations among tasks in support of Monte Carlo simulation analysis
+
 ## Summary and Conclusions
 
 * The risk network modeling and analysis approach described here provides a common framework for modeling and assessing project risk in terms of the uncertainty associated with the expenditure of resources
