@@ -8,7 +8,7 @@ output:
 ---
 
 ## Introduction
-<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/spar_2008b.png?raw=true" height="225px" />
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/spar_2008b.png?raw=true" height="275px" />
 
 * Technip is active in three primary business activities
     + Subsea
@@ -19,7 +19,7 @@ output:
 
 ## Project Risk Management Group
 
-<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Screen.Shot.2016-02-20.at.1.04.46.PM.png?raw=true" height="200px" />
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/PRVM.Team.Picture.jpg?raw=true" height="250px" />
 
 * Provide risk management support to the NA region
 * Facilitate project risk workshops and elicitation sessions
@@ -31,30 +31,10 @@ output:
 
 ## Common Risk in the Energy Industry
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library("d3wordcloud")
-library("tm")
-library("dplyr")
-library("viridis")
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/wordcloud.png?raw=true" height="450px" />
 
-riskData <- read.csv('RiskRegister.csv', stringsAsFactors = FALSE)
-riskCorpus <- Corpus(VectorSource(riskData$Risk))
-riskCorpus <- tm_map(riskCorpus, PlainTextDocument)
-riskCorpus <- tm_map(riskCorpus, removePunctuation)
-riskCorpus <- tm_map(riskCorpus, removeWords, c('based', 'aspect', 'will', '2015', stopwords('english')))
-tdm <- TermDocumentMatrix(riskCorpus)
-m <- as.matrix(tdm)
-v <- sort(rowSums(m), decreasing = TRUE)
-d <- data.frame(word = names(v), freq = v)
-d <- d %>% tbl_df()
-d <- d %>% arrange(desc(freq))
-d <- d %>% head(50)
-
-words <- d$word
-freqs <- d$freq
-
-d3wordcloud(words, freqs, tooltip = TRUE)
-```
+* Here is a wordcloud taken from a risk register in the offshore segment
+* What (if anything) do these risk items have in common?
 
 ## The Resource-based View (RBV)
 
@@ -76,7 +56,6 @@ d3wordcloud(words, freqs, tooltip = TRUE)
 * This approach is a natural bridge between the RBV theory and project risk management
 
 ## Causal Networks for Project Risk Analysis
-
 ```{r, echo=FALSE, warning=FALSE}
 library(bnlearn)
 library(networkD3)
@@ -87,9 +66,14 @@ simpleNetwork(data.frame(arcs(dag)), Source = "from", Target = "to",
                   opacity = 0.8)
 ```
 
+* Here is a simple project risk network for an offshore installation project
+* Notice how all risk impacts the project through the required resources
+
 ## Components for Model Development
 
-<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Model.Input.png?raw=true" height="500px" />
+<img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Model.Input.png?raw=true" height="450px" />
+
+* The model development approach is integrated with a number of methods already used in industry practice
 
 ## Bayesian Inference
 
@@ -108,18 +92,20 @@ simpleNetwork(data.frame(arcs(dag)), Source = "from", Target = "to",
 * Adding data to the model generally leads to more precise estimates of the model parameters
 
 ## Network Measures for Project Risk Analysis
-
 ```{r, echo=FALSE, warning=FALSE}
 library(d3heatmap)
 d3heatmap(amat(dag), dendrogram = "both", symm = TRUE, 
                 cexRow = 0.7, cexCol = 0.7, colors = "Blues")
 ```
 
+* Here is the adjacency matrix for the simple installation project shown earlier
+* The tree-like structure shows clusters of similarly interconnected parameters
+
 ## RiskNetwork: risk network modeling and analysis
+<img src="https://github.com/paulgovan/RiskNetwork/blob/master/images/RiskNetwork%20Structure%20Tab.png?raw=true" height="375px" />
 
-<img src="https://github.com/paulgovan/RiskNetwork/blob/master/images/RiskNetwork%20Structure%20Tab.png?raw=true" height="400px" />
-
-[http://paulgovan.github.io/RiskNetwork/](http://paulgovan.github.io/RiskNetwork/)
+* RiskNetwork is a web app for project risk network modeling and analysis
+* [http://paulgovan.github.io/RiskNetwork/](http://paulgovan.github.io/RiskNetwork/)
 
 ## Key Implications for the Energy Industry
 
