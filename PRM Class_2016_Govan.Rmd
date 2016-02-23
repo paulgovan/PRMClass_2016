@@ -22,7 +22,7 @@ output:
 <img src="https://github.com/paulgovan/PRMClass_2016/blob/master/Screen.Shot.2016-02-20.at.1.04.46.PM.png?raw=true" height="200px" />
 
 * Provide risk management support to the NA region
-* Faciliate project risk workshops and elicitation sessions
+* Facilitate project risk workshops and elicitation sessions
 * Perform MC cost and schedule simulation risk analysis
 * Research & development
     + Risk Management Dashboard (group)
@@ -31,7 +31,30 @@ output:
 
 ## Common Risk in the Energy Industry
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library("d3wordcloud")
+library("tm")
+library("dplyr")
+library("viridis")
 
+riskData <- read.csv('RiskRegister.csv', stringsAsFactors = FALSE)
+riskCorpus <- Corpus(VectorSource(riskData$Risk))
+riskCorpus <- tm_map(riskCorpus, PlainTextDocument)
+riskCorpus <- tm_map(riskCorpus, removePunctuation)
+riskCorpus <- tm_map(riskCorpus, removeWords, c('based', 'aspect', 'will', '2015', stopwords('english')))
+tdm <- TermDocumentMatrix(riskCorpus)
+m <- as.matrix(tdm)
+v <- sort(rowSums(m), decreasing = TRUE)
+d <- data.frame(word = names(v), freq = v)
+d <- d %>% tbl_df()
+d <- d %>% arrange(desc(freq))
+d <- d %>% head(50)
+
+words <- d$word
+freqs <- d$freq
+
+d3wordcloud(words, freqs, tooltip = TRUE)
+```
 
 ## The Resource-based View (RBV)
 
@@ -108,7 +131,7 @@ d3heatmap(amat(dag), dendrogram = "both", symm = TRUE,
 ## Summary and Conclusions
 
 * The risk network modeling and analysis approach described here provides a common framework for modeling and assessing project risk in terms of the uncertainty associated with the expenditure of resources
-* This framework is applicable acrosss different functions of the organization and at different hierarchical levels for task, project, and organizational decision-making
+* This framework is applicable across different functions of the organization and at different hierarchical levels for task, project, and organizational decision-making
 * The integrative risk network approach allows for both graphical structural and data-intensive evaluation of project risks
 * Another key aspect of this approach is that it is already integrated with a number of methods already used in industry practice with little to no additional requirements
 
